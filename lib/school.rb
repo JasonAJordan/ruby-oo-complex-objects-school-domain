@@ -2,29 +2,38 @@
 
 class School 
 
+    attr_accessor :name, :roster
+
     def initialize(name)
         @name = name 
         @roster = {}
     end 
 
-    def roster
-        @roster
-    end 
 
-    def add_student=(student,grade)
-        if @roster[:grade] 
-            @roster[:grade].push(student)
+    def add_student (student,grade)
+        if @roster[grade]  
+            @roster[grade].push(student)
         else 
-            @roster[:grade] = student
+            @roster[grade] = [student]
         end 
     end 
 
-    def grade=(grade)
-        @roster[:grade]
+    # def add_student (student,grade)
+    #     roster[grade] ||= []
+    #     roster[grade] << student
+    # end 
+
+    def grade (grade)
+        @roster[grade]
     end 
     
     def sort
-        @roster.sort
+        sorted = {}
+        roster.each do |grade, students|
+            sorted[grade] = students.sort
+        end 
+        sorted
+
     end 
 
 end 
